@@ -144,10 +144,10 @@ class Main:
                 )
 
             regOptions = [
-                [winreg.HKEY_CURRENT_USER, "Software\Git-Cheetah", "PathToMsys"],
-                [winreg.HKEY_LOCAL_MACHINE, "Software\Git-Cheetah", "PathToMsys"],
-                [winreg.HKEY_CURRENT_USER, "Software\GitForWindows", "InstallPath"],
-                [winreg.HKEY_LOCAL_MACHINE, "Software\GitForWindows", "InstallPath"],
+                [winreg.HKEY_CURRENT_USER, r"Software\Git-Cheetah", "PathToMsys"],
+                [winreg.HKEY_LOCAL_MACHINE, r"Software\Git-Cheetah", "PathToMsys"],
+                [winreg.HKEY_CURRENT_USER, r"Software\GitForWindows", "InstallPath"],
+                [winreg.HKEY_LOCAL_MACHINE, r"Software\GitForWindows", "InstallPath"],
             ]
 
             path = None
@@ -502,12 +502,12 @@ class Main:
         file = os.path.join(build_dir, "compile_debug_and_release.bat")
 
         content = (
-            'if "%VSWHERE%"=="" set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\\vswhere.exe" \n'
-            + 'for /f "usebackq tokens=*" %%i in (`"%VSWHERE%" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (set InstallDir=%%i) \n'
-            + 'CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat" \n'
-            + "msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=debug /p:platform=x64 \n"
-            + 'CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat" \n'
-            + "msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=release /p:platform=x64"
+            r'if "%VSWHERE%"=="" set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\\vswhere.exe" \n'
+            + r'for /f "usebackq tokens=*" %%i in (`"%VSWHERE%" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (set InstallDir=%%i) \n'
+            + r'CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat" \n'
+            + r"msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=debug /p:platform=x64 \n"
+            + r'CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat" \n'
+            + r"msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=release /p:platform=x64"
         )  # \n PAUSE"
 
         with open(file, mode="w") as fp:

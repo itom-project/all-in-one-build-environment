@@ -1,0 +1,7 @@
+pip
+setuptools
+wheel
+numpy != 1.19.4
+flake8
+flake8-bugbear
+jedi

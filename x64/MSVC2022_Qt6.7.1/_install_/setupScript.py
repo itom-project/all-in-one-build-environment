@@ -501,16 +501,16 @@ class Main:
         """
         file = os.path.join(build_dir, "compile_debug_and_release.bat")
 
-        content = (
-            r'if "%VSWHERE%"=="" set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\\vswhere.exe" \n'
-            + r'for /f "usebackq tokens=*" %%i in (`"%VSWHERE%" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (set InstallDir=%%i) \n'
-            + r'CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat" \n'
-            + r"msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=debug /p:platform=x64 \n"
-            + r'CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat" \n'
-            + r"msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=release /p:platform=x64"
-        )  # \n PAUSE"
+        content =
+r"""if "%VSWHERE%"=="" set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\\vswhere.exe"
+for /f "usebackq tokens=*" %%i in (`"%VSWHERE%" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (set InstallDir=%%i)
+CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat"
+msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=debug /p:platform=x64
+CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat"
+msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=release /p:platform=x64
+"""
 
-        with open(file, mode="w") as fp:
+        with open(file, mode="wt") as fp:
             fp.write(content)
 
         print("Start compiling", project_name, "in debug and release...")

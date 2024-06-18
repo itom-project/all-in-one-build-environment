@@ -501,7 +501,7 @@ class Main:
         """
         file = os.path.join(build_dir, "compile_debug_and_release.bat")
 
-        content =
+        content = \
 r"""if "%VSWHERE%"=="" set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\\vswhere.exe"
 for /f "usebackq tokens=*" %%i in (`"%VSWHERE%" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (set InstallDir=%%i)
 CALL "%InstallDir%\Common7\Tools\VsDevCmd.bat"

@@ -13,6 +13,8 @@ import jedi
 import flake8
 import platform
 
+__version__ = "1.0.0"
+
 
 # -------------------------------------------
 class Main:

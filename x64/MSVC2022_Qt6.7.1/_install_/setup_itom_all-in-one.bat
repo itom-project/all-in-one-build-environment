@@ -1,15 +1,12 @@
-TITLE %~dp0 INSTALL ITOM DEVELOPMENT ENVIORNMENT
-
-%~dp0..\3rdParty\Python\python.exe -m pip install --upgrade pip%*
-%~dp0..\3rdParty\Python\python.exe -m pip install -r requirements.txt%*
+TITLE %~dp0 INSTALL ITOM DEVELOPMENT ENVIRONMENT
 
 @echo off
 set setupScriptName=setupScript.py
 set setupScriptPath=https://raw.githubusercontent.com/itom-project/all-in-one-build-setup/main/x64/MSVC2022_Qt6.7.1/_install_/%setupScriptName%
 
-echo --------------------------------------------------
-echo -- Check, download and execute the setup script --
-echo --------------------------------------------------
+echo ---------------------------------------------
+echo -- STEP 1: Setup script: check for updates --
+echo ---------------------------------------------
 
 if exist %~dp0%setupScriptName% (
     echo The main installation script %setupScriptName% already exists.
@@ -29,11 +26,11 @@ if exist %~dp0%setupScriptName% (
 rem choice command must be outside of if block
 choice /M "Should the file be downloaded to get the latest version before executing it (recommended)?"
 if %ERRORLEVEL% == 1 (goto download_file)
-goto start_script
+goto continue_process
 
 :download_file
 echo download file
-curl -f -o %setupScriptName% %setupScriptPath%
+curl -f -o %setupScriptName% -H "Cache-Control: no-cache, no-store" %setupScriptPath%
 
 if %ERRORLEVEL% NEQ 0 (
     echo "The file 
@@ -43,7 +40,21 @@ if %ERRORLEVEL% NEQ 0 (
     goto end
 )
 
-:start_script   
+:continue_process   
+
+echo ----------------------------------------------------------
+echo -- STEP 2: Update Python and install packages           --
+echo ----------------------------------------------------------
+
+@echo on
+%~dp0..\3rdParty\Python\python.exe -m pip install --upgrade pip%*
+%~dp0..\3rdParty\Python\python.exe -m pip install -r requirements.txt%*
+
+@echo off
+echo ----------------------------------------------------------
+echo -- STEP 3: Run the setup script                         --
+echo ----------------------------------------------------------
+
 @echo on
 %~dp0..\3rdParty\Python\python.exe %~dp0/%setupScriptName% %*
 

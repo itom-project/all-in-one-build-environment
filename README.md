@@ -1,8 +1,8 @@
-# all-in-one-build-setup
-scripts and files for the all-in-one-build setups, containing scripts and 3rd party binaries, that help to easily get a self-compiled version of itom.
+# all-in-one-build-environment
+scripts and files for the all-in-one-build environment setups, containing scripts and 3rd party binaries, that help to easily get a self-compiled version of itom.
 
 ## Introduction
-In order to simplify the compilation of **itom** under Windows, build packages, denoted as **all-in-one-build-setups** are provided for different versions of necessary 3rd party libraries and Visual Studio versions under [https://sourceforge.net/projects/itom/files/all-in-one-build-setup/]. 
+In order to simplify the compilation of **itom** under Windows, build packages, denoted as **all-in-one-build-environment** are provided for different versions of necessary 3rd party libraries and Visual Studio versions under [https://sourceforge.net/projects/itom/files/all-in-one-build-setup/]. 
 
 These packages mainly contain the following features:
 

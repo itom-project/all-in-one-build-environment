@@ -307,7 +307,6 @@ class Main:
             + '-DITOM_SDK_DIR:PATH="%(itom_sdk_dir)s" -DPCL_DIR:PATH="%(pcl_dir)s" '
             + '-DBoost_USE_STATIC_LIBS:BOOL=ON -DVTK_DIR:PATH="%(vtk_dir)s" '
             + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_INCLUDE_DIR:PATH="%(eigen_include_dir)s" '
-            + '-DFLANN_INCLUDE_DIRS:PATH="%(flann_include_dir)s" -DFLANN_INCLUDE_DIR:PATH="%(flann_include_dir)s" -DFLANN_LIBRARY:FILEPATH="%(flann_library)s" -DFLANN_LIBRARY_DEBUG:FILEPATH="%(flann_library_debug)s" '
             + '-DQHULL_INCLUDE_DIRS:PATH="%(qhull_include_dir)s" -DQHULL_LIBRARY:FILEPATH="%(qhull_library_dir)s" -DQHULL_LIBRARY_DEBUG:FILEPATH="%(qhull_library_dir_debug)s" '
             + '-DPCL_FLANN_REQUIRED_TYPE:STRING=STATIC -DFLANN_ROOT:PATH="%(flann_root)s" '
         )
@@ -445,9 +444,6 @@ class Main:
             vtkBinaries = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\bin")
             eigenIncludeDir = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")
             flannRoot = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1")
-            flannIncludeDir = os.path.join(flannRoot, "include")
-            flannLibrary = os.path.join(flannRoot, "lib\\flann_cpp_s.lib")
-            flannLibraryDebug = os.path.join(flannRoot, "lib\\flann_cpp_s-gd.lib")
             boostIncludeDir = self.__clearPath("..\\3rdPartyPCL\\boost1.78.0")
             qHullIncludeDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\include")
             qHullLibraryDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\lib\\qhullstatic.lib")
@@ -459,9 +455,6 @@ class Main:
             vtkBinaries = ""
             eigenIncludeDir = ""
             flannRoot = ""
-            flannIncludeDir = ""
-            flannLibrary = ""
-            flannLibraryDebug = ""
             boostIncludeDir = ""
             qHullIncludeDir = ""
             qHullLibraryDir = ""
@@ -490,9 +483,6 @@ class Main:
         cmake_dict["boost_include_dir"] = boostIncludeDir
         cmake_dict["eigen_include_dir"] = eigenIncludeDir
         cmake_dict["flann_root"] = flannRoot
-        cmake_dict["flann_include_dir"] = flannIncludeDir
-        cmake_dict["flann_library"] = flannLibrary
-        cmake_dict["flann_library_debug"] = flannLibraryDebug
         cmake_dict["qhull_include_dir"] = qHullIncludeDir
         cmake_dict["qhull_library_dir"] = qHullLibraryDir
         cmake_dict["qhull_library_dir_debug"] = qHullLibraryDirDebug
@@ -609,9 +599,10 @@ msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=release /p:platform=x64
             )
             print("    4 {}: configure and generate CMake (plugins and designer plugins)".format(plugins_cmake_text))
             print("    5 {}: compile plugins and designer plugins in Debug and Release".format(plugins_compile_text))
-            print("    6: Prepend Qt, OpenCV and optionally PCL to PATH variable")
+            print("    6: Generate and display a string to prepend Qt, OpenCV and optionally PCL to PATH variable (optional)")
             print("")
-            print("    A: execute all steps")
+            print("    A: execute all steps 1-6")
+            print("    B: execute steps 1-5")
             print("    -1: EXIT")
             print("---------------------------------------")
 
@@ -644,6 +635,15 @@ msbuild.exe %~dp0\ALL_BUILD.vcxproj /p:configuration=release /p:platform=x64
                             (self.__currentDir + "\\..\\build\\designerplugins"), "designerplugins"
                         )
                         self.showEnverText()
+                    case "B":
+                        self.cloneGit()
+                        self.runCMakeItom()
+                        self.compileDebugAndRelease((self.__currentDir + "\\..\\build\\itom"), "itom")
+                        self.runCMakePlugins()
+                        self.compileDebugAndRelease((self.__currentDir + "\\..\\build\\plugins"), "plugins")
+                        self.compileDebugAndRelease(
+                            (self.__currentDir + "\\..\\build\\designerplugins"), "designerplugins"
+                        )
                     case "-1":
                         print("exit")
                         break

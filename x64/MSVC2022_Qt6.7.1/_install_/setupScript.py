@@ -309,6 +309,7 @@ class Main:
             + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_INCLUDE_DIR:PATH="%(eigen_include_dir)s" '
             + '-DFLANN_INCLUDE_DIRS:PATH="%(flann_include_dir)s" -DFLANN_INCLUDE_DIR:PATH="%(flann_include_dir)s" -DFLANN_LIBRARY:FILEPATH="%(flann_library)s" -DFLANN_LIBRARY_DEBUG:FILEPATH="%(flann_library_debug)s" '
             + '-DQHULL_INCLUDE_DIRS:PATH="%(qhull_include_dir)s" -DQHULL_LIBRARY:FILEPATH="%(qhull_library_dir)s" -DQHULL_LIBRARY_DEBUG:FILEPATH="%(qhull_library_dir_debug)s" '
+            + '-DPCL_FLANN_REQUIRED_TYPE:STRING=STATIC -DFLANN_ROOT:PATH="%(flann_root)s" '
         )
 
         d = cmake_dict.copy()
@@ -377,6 +378,7 @@ class Main:
             + '-DCONSIDER_GIT_SVN:BOOL=TRUE -DPREFER_GIT:BOOL=TRUE "%(source_dir)s" '
             + '-DQt_Prefix_DIR:PATH="%(qt_prefix_dir)s" -DPCL_DIR:PATH="%(pcl_dir)s" -DBoost_USE_STATIC_LIBS:BOOL=ON -DVTK_DIR:PATH="%(vtk_dir)s" '
             + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_INCLUDE_DIR:PATH="%(eigen_include_dir)s" '
+            + '-DPCL_FLANN_REQUIRED_TYPE:STRING=STATIC -DFLANN_ROOT:PATH="%(flann_root)s" '
         )
 
         d = cmake_dict.copy()
@@ -442,9 +444,10 @@ class Main:
             vtkDir = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\lib\\cmake\\vtk-9.2")
             vtkBinaries = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\bin")
             eigenIncludeDir = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")
-            flannIncludeDir = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1\\include")
-            flannLibrary = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1\\lib\\flann_cpp_s.lib")
-            flannLibraryDebug = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1\\lib\\flann_cpp_s-gd.lib")
+            flannRoot = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1")
+            flannIncludeDir = os.path.join(flannRoot, "include")
+            flannLibrary = os.path.join(flannRoot, "lib\\flann_cpp_s.lib")
+            flannLibraryDebug = os.path.join(flannRoot, "lib\\flann_cpp_s-gd.lib")
             boostIncludeDir = self.__clearPath("..\\3rdPartyPCL\\boost1.78.0")
             qHullIncludeDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\include")
             qHullLibraryDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\lib\\qhullstatic.lib")
@@ -455,6 +458,7 @@ class Main:
             vtkDir = ""
             vtkBinaries = ""
             eigenIncludeDir = ""
+            flannRoot = ""
             flannIncludeDir = ""
             flannLibrary = ""
             flannLibraryDebug = ""
@@ -485,6 +489,7 @@ class Main:
         cmake_dict["vtk_bin_dir"] = vtkBinaries
         cmake_dict["boost_include_dir"] = boostIncludeDir
         cmake_dict["eigen_include_dir"] = eigenIncludeDir
+        cmake_dict["flann_root"] = flannRoot
         cmake_dict["flann_include_dir"] = flannIncludeDir
         cmake_dict["flann_library"] = flannLibrary
         cmake_dict["flann_library_debug"] = flannLibraryDebug

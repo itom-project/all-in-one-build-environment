@@ -1,7 +1,0 @@
-pip
-setuptools
-wheel
-numpy < 2.0.0
-flake8
-flake8-bugbear
-jedi

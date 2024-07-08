@@ -13,7 +13,7 @@ import jedi
 import flake8
 import platform
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 # -------------------------------------------
@@ -306,7 +306,7 @@ class Main:
             + '-DQt_Prefix_DIR:PATH="%(qt_prefix_dir)s" -DITOM_SDK:PATH="%(itom_sdk_dir)s" '
             + '-DITOM_SDK_DIR:PATH="%(itom_sdk_dir)s" -DPCL_DIR:PATH="%(pcl_dir)s" '
             + '-DBoost_USE_STATIC_LIBS:BOOL=ON -DVTK_DIR:PATH="%(vtk_dir)s" '
-            + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_INCLUDE_DIR:PATH="%(eigen_include_dir)s" '
+            + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_INCLUDE_DIR:PATH="%(eigen_root)s" -DEIGEN_ROOT:PATH="%(eigen_root)s" '
             + '-DQHULL_INCLUDE_DIRS:PATH="%(qhull_include_dir)s" -DQHULL_LIBRARY:FILEPATH="%(qhull_library_dir)s" -DQHULL_LIBRARY_DEBUG:FILEPATH="%(qhull_library_dir_debug)s" '
             + '-DPCL_FLANN_REQUIRED_TYPE:STRING=STATIC -DFLANN_ROOT:PATH="%(flann_root)s" '
         )
@@ -376,7 +376,7 @@ class Main:
             + '-DQT_QMAKE_EXECUTABLE:FILEPATH="%(qmake_dir)s" -DBUILD_TARGET64:BOOL=TRUE -DPython_ROOT_DIR:FILEPATH="%(python_root_dir)s" '
             + '-DCONSIDER_GIT_SVN:BOOL=TRUE -DPREFER_GIT:BOOL=TRUE "%(source_dir)s" '
             + '-DQt_Prefix_DIR:PATH="%(qt_prefix_dir)s" -DPCL_DIR:PATH="%(pcl_dir)s" -DBoost_USE_STATIC_LIBS:BOOL=ON -DVTK_DIR:PATH="%(vtk_dir)s" '
-            + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_INCLUDE_DIR:PATH="%(eigen_include_dir)s" '
+            + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_INCLUDE_DIR:PATH="%(eigen_root)s" -DEIGEN_ROOT:PATH="%(eigen_root)s" '
             + '-DPCL_FLANN_REQUIRED_TYPE:STRING=STATIC -DFLANN_ROOT:PATH="%(flann_root)s" '
         )
 
@@ -442,8 +442,8 @@ class Main:
             pclBinDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.13.0\\bin")
             vtkDir = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\lib\\cmake\\vtk-9.2")
             vtkBinaries = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\bin")
-            eigenIncludeDir = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")
-            flannRoot = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1")
+            eigenRootDir = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")
+            flannRootDir = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1")
             boostIncludeDir = self.__clearPath("..\\3rdPartyPCL\\boost1.78.0")
             qHullIncludeDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\include")
             qHullLibraryDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\lib\\qhullstatic.lib")
@@ -453,8 +453,8 @@ class Main:
             pclBinDir = ""
             vtkDir = ""
             vtkBinaries = ""
-            eigenIncludeDir = ""
-            flannRoot = ""
+            eigenRootDir = ""
+            flannRootDir = ""
             boostIncludeDir = ""
             qHullIncludeDir = ""
             qHullLibraryDir = ""
@@ -481,8 +481,8 @@ class Main:
         cmake_dict["vtk_dir"] = vtkDir
         cmake_dict["vtk_bin_dir"] = vtkBinaries
         cmake_dict["boost_include_dir"] = boostIncludeDir
-        cmake_dict["eigen_include_dir"] = eigenIncludeDir
-        cmake_dict["flann_root"] = flannRoot
+        cmake_dict["eigen_root"] = eigenRootDir
+        cmake_dict["flann_root"] = flannRootDir
         cmake_dict["qhull_include_dir"] = qHullIncludeDir
         cmake_dict["qhull_library_dir"] = qHullLibraryDir
         cmake_dict["qhull_library_dir_debug"] = qHullLibraryDirDebug

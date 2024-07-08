@@ -156,10 +156,10 @@ class Main:
                 )
 
             regOptions = [
-                [winreg.HKEY_CURRENT_USER, r"Software\Git-Cheetah", "PathToMsys"],
-                [winreg.HKEY_LOCAL_MACHINE, r"Software\Git-Cheetah", "PathToMsys"],
-                [winreg.HKEY_CURRENT_USER, r"Software\GitForWindows", "InstallPath"],
-                [winreg.HKEY_LOCAL_MACHINE, r"Software\GitForWindows", "InstallPath"],
+                [winreg.HKEY_CURRENT_USER, "Software\\Git-Cheetah", "PathToMsys"],
+                [winreg.HKEY_LOCAL_MACHINE, "Software\\Git-Cheetah", "PathToMsys"],
+                [winreg.HKEY_CURRENT_USER, "Software\\GitForWindows", "InstallPath"],
+                [winreg.HKEY_LOCAL_MACHINE, "Software\\GitForWindows", "InstallPath"],
             ]
 
             path = None
@@ -305,7 +305,7 @@ class Main:
         Returns:
             dict: CMake config
         """
-        generator = "Visual Studio 17"
+        generator = "Visual Studio 16"
         arch = "x64"
 
         supportedLanguages = ["de"]
@@ -318,12 +318,12 @@ class Main:
             self.saveConfig()
 
         libusbIncludeDir = self.__clearPath("..\\3rdParty\\libusb-1.0.27")
-        openCVPath = self.__clearPath("..\\3rdParty\\OpenCV4.10.0")
-        openCVBinDir = self.__clearPath("..\\3rdParty\\OpenCV4.10.0\\x64\\vc17\\bin")
-        qmakePath = self.__clearPath("..\\3rdParty\\Qt6.7\\6.7.2\\msvc2019_64\\bin")
-        qtBinDir = self.__clearPath("..\\3rdParty\\Qt6.7\\6.7.2\\msvc2019_64\\bin")
-        qtPrefixDir = self.__clearPath("..\\3rdParty\\Qt6.7\\6.7.2\\msvc2019_64")
-        qtBuildVersion = "Qt6"
+        openCVPath = self.__clearPath("..\\3rdParty\\OpenCV4.5.3")
+        openCVBinDir = self.__clearPath("..\\3rdParty\\OpenCV4.5.3\\x64\\vc16\\bin")
+        qmakePath = self.__clearPath("..\\3rdParty\\Qt5.15.2\\5.15.2\\msvc2019_64\\bin")
+        qtBinDir = self.__clearPath("..\\3rdParty\\Qt5.15.2\\5.15.2\\msvc2019_64\\bin")
+        qtPrefixDir = self.__clearPath("..\\3rdParty\\Qt5.15.2\\5.15.2\\msvc2019_64")
+        qtBuildVersion = "Qt5"
         pythonExecPath = self.__clearPath(sys.executable)
         pythonPath = self.__clearPath(os.path.dirname(sys.executable))
         pythonRootDir = self.__clearPath(pythonPath)
@@ -332,13 +332,13 @@ class Main:
             self.askForPCL()
 
         if self.config["build_with_pcl"] == "TRUE":
-            pclDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.13.0")
-            pclBinDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.13.0\\bin")
-            vtkDir = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\lib\\cmake\\vtk-9.0")
-            vtkBinaries = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\bin")
+            pclDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.12.0")
+            pclBinDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.12.0\\bin")
+            vtkDir = self.__clearPath("..\\3rdPartyPCL\\VTK9.0.3\\lib\\cmake\\vtk-9.0")
+            vtkBinaries = self.__clearPath("..\\3rdPartyPCL\\VTK9.0.3\\bin")
             eigenDir = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")
             flannRoot = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1")
-            boostIncludeDir = self.__clearPath("..\\3rdPartyPCL\\boost1.78.0")
+            boostIncludeDir = self.__clearPath("..\\3rdPartyPCL\\boost1.77.0")
             qHullIncludeDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\include")
             qHullLibraryDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\lib\\qhullstatic.lib")
             qHullLibraryDirDebug = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\lib\\qhullstatic_d.lib")
@@ -405,7 +405,7 @@ class Main:
             + "msbuild.exe %~dp0\\ALL_BUILD.vcxproj /p:configuration=release /p:platform=x64"
         )  # \n PAUSE"
 
-        with open(file, mode="wt") as fp:
+        with open(file, mode="w") as fp:
             fp.write(content)
 
         print("Start compiling", project_name, "in debug and release...")

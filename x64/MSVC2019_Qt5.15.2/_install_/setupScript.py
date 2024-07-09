@@ -13,6 +13,7 @@ import jedi
 import flake8
 import platform
 
+__version__ = "1.0.2"
 
 # -------------------------------------------
 class Main:
@@ -317,7 +318,7 @@ class Main:
             self.config["cmake_dir"] = cmakePath
             self.saveConfig()
 
-        libusbIncludeDir = self.__clearPath("..\\3rdParty\\libusb-1.0.27")
+        libusbDir = self.__clearPath("..\\3rdParty\\libusb-1.0.27")
         openCVPath = self.__clearPath("..\\3rdParty\\OpenCV4.10.0")
         openCVBinDir = self.__clearPath("..\\3rdParty\\OpenCV4.10.0\\x64\\vc16\\bin")
         qmakePath = self.__clearPath("..\\3rdParty\\Qt5.15.2\\5.15.2\\msvc2019_64\\bin")
@@ -375,7 +376,7 @@ class Main:
         cmake_dict["eigen_root"] = eigenRoot
         cmake_dict["flann_root"] = flannRoot
         cmake_dict["qhull_root"] = qHullRoot
-        cmake_dict["libusb_include_dir"] = libusbIncludeDir
+        cmake_dict["libusb_include_dir"] = libusbDir
         cmake_dict["build_itom_core"] = self.build_itom_core
         cmake_dict["build_itom_designerplugins"] = self.build_itom_designerplugins
         cmake_dict["build_itom_plugins"] = self.build_itom_plugins

@@ -13,6 +13,7 @@ import jedi
 import flake8
 import platform
 
+__version__ = "1.0.2"
 
 # -------------------------------------------
 class Main:
@@ -356,21 +357,25 @@ class Main:
         cmake_dict["cmake_executable"] = cmakePath
         cmake_dict["itom_languages"] = ",".join(supportedLanguages)
         cmake_dict["qt_prefix_dir"] = qtPrefixDir
+        cmake_dict["qt_bin_dir"] = qtBinDir
         cmake_dict["generator"] = generator
         cmake_dict["arch"] = arch
         cmake_dict["opencv_dir"] = openCVPath
+        cmake_dict["opencv_bin_dir"] = openCVBinDir
         cmake_dict["qmake_dir"] = qmakePath
         cmake_dict["python_executable"] = pythonExecPath
         cmake_dict["python_root_dir"] = pythonRootDir
         cmake_dict["cmake_gui_executable"] = self.__clearPath(os.path.join(os.path.dirname(cmakePath), "cmake-gui.exe"))
         cmake_dict["build_with_pcl"] = self.config["build_with_pcl"]
         cmake_dict["pcl_dir"] = pclDir
+        cmake_dict["pcl_bin_dir"] = pclBinDir
         cmake_dict["vtk_dir"] = vtkDir
+        cmake_dict["vtk_bin_dir"] = vtkBinaries
         cmake_dict["boost_include_dir"] = boostIncludeDir
         cmake_dict["eigen_root"] = eigenRoot
         cmake_dict["flann_root"] = flannRoot
         cmake_dict["qhull_root"] = qHullRoot
-        cmake_dict["libusb_include_dir"] = libusbDir
+        cmake_dict["libusb_include_dir"] = libusbIncludeDir
         cmake_dict["build_itom_core"] = self.build_itom_core
         cmake_dict["build_itom_designerplugins"] = self.build_itom_designerplugins
         cmake_dict["build_itom_plugins"] = self.build_itom_plugins

@@ -260,9 +260,9 @@ class Main:
             + '-DQT_QMAKE_EXECUTABLE:FILEPATH="%(qmake_dir)s" -DBUILD_TARGET64:BOOL=TRUE -DPython_ROOT_DIR:FILEPATH="%(python_root_dir)s" '
             + '-DCONSIDER_GIT_SVN:BOOL=TRUE -DPREFER_GIT:BOOL=TRUE "%(source_dir)s" '
             + '-DQt_Prefix_DIR:PATH="%(qt_prefix_dir)s" -DPCL_DIR:PATH="%(pcl_dir)s" -DBoost_USE_STATIC_LIBS:BOOL=ON -DVTK_DIR:PATH="%(vtk_dir)s" '
-            + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEigen_DIR:PATH="%(eigen_dir)s" '
+            + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_ROOT:PATH="%(eigen_root)s" '
             + '-DFLANN_ROOT:PATH="%(flann_root)s" '
-            + '-DQHULL_INCLUDE_DIRS:PATH="%(qhull_include_dir)s" -DQHULL_LIBRARY:FILEPATH="%(qhull_library_dir)s" -DQHULL_LIBRARY_DEBUG:FILEPATH="%(qhull_library_dir_debug)s" '
+            + '-DQHULL_ROOT:PATH="%(qhull_root)s" '
             + '-DLibUSB_DIR:PATH="%(libusb_include_dir)s" '
             + '-DBUILD_ITOM_CORE:BOOL=%(build_itom_core)s -DBUILD_ITOM_DESIGNERPLUGINS:BOOL=%(build_itom_designerplugins)s -DBUILD_ITOM_PLUGINS:BOOL=%(build_itom_plugins)s '
         )
@@ -313,11 +313,11 @@ class Main:
         if self.config["cmake_dir"] and os.path.exists(self.config["cmake_dir"]):
             cmakePath = self.config["cmake_dir"]
         else:
-            cmakePath = self.__clearPath("..\\3rdParty\\cmake-3.21.2\\bin\\cmake.exe")
+            cmakePath = self.__clearPath("..\\3rdParty\\CMake-3.29.5\\bin\\cmake.exe")
             self.config["cmake_dir"] = cmakePath
             self.saveConfig()
 
-        libusbIncludeDir = self.__clearPath("..\\3rdParty\\libusb-1.0.27")
+        libusbDir = self.__clearPath("..\\3rdParty\\libusb-1.0.27")
         openCVPath = self.__clearPath("..\\3rdParty\\OpenCV4.10.0")
         openCVBinDir = self.__clearPath("..\\3rdParty\\OpenCV4.10.0\\x64\\vc17\\bin")
         qmakePath = self.__clearPath("..\\3rdParty\\Qt6.7\\6.7.2\\msvc2019_64\\bin")
@@ -336,23 +336,19 @@ class Main:
             pclBinDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.13.0\\bin")
             vtkDir = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\lib\\cmake\\vtk-9.0")
             vtkBinaries = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\bin")
-            eigenDir = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")
+            eigenRoot = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")
             flannRoot = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1")
             boostIncludeDir = self.__clearPath("..\\3rdPartyPCL\\boost1.78.0")
-            qHullIncludeDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\include")
-            qHullLibraryDir = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\lib\\qhullstatic.lib")
-            qHullLibraryDirDebug = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2\\lib\\qhullstatic_d.lib")
+            qHullRoot = self.__clearPath("..\\3rdPartyPCL\\QHull2020.2")
         else:
             pclDir = ""
             pclBinDir = ""
             vtkDir = ""
             vtkBinaries = ""
-            eigenDir = ""
+            eigenRoot = ""
             flannRoot = ""
             boostIncludeDir = ""
-            qHullIncludeDir = ""
-            qHullLibraryDir = ""
-            qHullLibraryDirDebug = ""
+            qHullRoot = ""
 
         cmake_dict = {}
         cmake_dict["build64"] = "TRUE"
@@ -360,27 +356,21 @@ class Main:
         cmake_dict["cmake_executable"] = cmakePath
         cmake_dict["itom_languages"] = ",".join(supportedLanguages)
         cmake_dict["qt_prefix_dir"] = qtPrefixDir
-        cmake_dict["qt_bin_dir"] = qtBinDir
         cmake_dict["generator"] = generator
         cmake_dict["arch"] = arch
         cmake_dict["opencv_dir"] = openCVPath
-        cmake_dict["opencv_bin_dir"] = openCVBinDir
         cmake_dict["qmake_dir"] = qmakePath
         cmake_dict["python_executable"] = pythonExecPath
         cmake_dict["python_root_dir"] = pythonRootDir
         cmake_dict["cmake_gui_executable"] = self.__clearPath(os.path.join(os.path.dirname(cmakePath), "cmake-gui.exe"))
         cmake_dict["build_with_pcl"] = self.config["build_with_pcl"]
         cmake_dict["pcl_dir"] = pclDir
-        cmake_dict["pcl_bin_dir"] = pclBinDir
         cmake_dict["vtk_dir"] = vtkDir
-        cmake_dict["vtk_bin_dir"] = vtkBinaries
         cmake_dict["boost_include_dir"] = boostIncludeDir
-        cmake_dict["eigen_dir"] = eigenDir
+        cmake_dict["eigen_root"] = eigenRoot
         cmake_dict["flann_root"] = flannRoot
-        cmake_dict["qhull_include_dir"] = qHullIncludeDir
-        cmake_dict["qhull_library_dir"] = qHullLibraryDir
-        cmake_dict["qhull_library_dir_debug"] = qHullLibraryDirDebug
-        cmake_dict["libusb_include_dir"] = libusbIncludeDir
+        cmake_dict["qhull_root"] = qHullRoot
+        cmake_dict["libusb_include_dir"] = libusbDir
         cmake_dict["build_itom_core"] = self.build_itom_core
         cmake_dict["build_itom_designerplugins"] = self.build_itom_designerplugins
         cmake_dict["build_itom_plugins"] = self.build_itom_plugins

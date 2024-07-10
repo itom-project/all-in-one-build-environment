@@ -1,7 +1,7 @@
 # coding=iso-8859-15
 import json
 import os
-from subprocess import call, check_call
+from subprocess import call, check_call, Popen
 import subprocess
 import sys
 import traceback
@@ -264,7 +264,7 @@ class Main:
             + '-DBoost_INCLUDE_DIR:PATH="%(boost_include_dir)s" -DEIGEN_ROOT:PATH="%(eigen_root)s" '
             + '-DFLANN_ROOT:PATH="%(flann_root)s" '
             + '-DQHULL_ROOT:PATH="%(qhull_root)s" '
-            + '-DLibUSB_DIR:PATH="%(libusb_include_dir)s" '
+            + '-DLibUSB_DIR:PATH="%(libusb_dir)s" '
             + '-DBUILD_ITOM_CORE:BOOL=%(build_itom_core)s -DBUILD_ITOM_DESIGNERPLUGINS:BOOL=%(build_itom_designerplugins)s -DBUILD_ITOM_PLUGINS:BOOL=%(build_itom_plugins)s '
         )
 
@@ -375,7 +375,7 @@ class Main:
         cmake_dict["eigen_root"] = eigenRoot
         cmake_dict["flann_root"] = flannRoot
         cmake_dict["qhull_root"] = qHullRoot
-        cmake_dict["libusb_include_dir"] = libusbDir
+        cmake_dict["libusb_dir"] = libusbDir
         cmake_dict["build_itom_core"] = self.build_itom_core
         cmake_dict["build_itom_designerplugins"] = self.build_itom_designerplugins
         cmake_dict["build_itom_plugins"] = self.build_itom_plugins

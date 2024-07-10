@@ -333,9 +333,9 @@ class Main:
             self.askForPCL()
 
         if self.config["build_with_pcl"] == "TRUE":
-            pclDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.13.0")
-            pclBinDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.13.0\\bin")
-            vtkDir = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\lib\\cmake\\vtk-9.0")
+            pclDir = self.__clearPath("..\\3rdPartyPCL\\PCL1.13.0")
+            pclBinDir = self.__clearPath("..\\3rdPartyPCL\\PCL1.13.0\\bin")
+            vtkDir = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\lib\\cmake\\vtk-9.2")
             vtkBinaries = self.__clearPath("..\\3rdPartyPCL\\VTK9.2.2\\bin")
             eigenRoot = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")
             flannRoot = self.__clearPath("..\\3rdPartyPCL\\flann1.9.1")
@@ -375,7 +375,7 @@ class Main:
         cmake_dict["eigen_root"] = eigenRoot
         cmake_dict["flann_root"] = flannRoot
         cmake_dict["qhull_root"] = qHullRoot
-        cmake_dict["libusb_include_dir"] = libusbIncludeDir
+        cmake_dict["libusb_include_dir"] = libusbDir
         cmake_dict["build_itom_core"] = self.build_itom_core
         cmake_dict["build_itom_designerplugins"] = self.build_itom_designerplugins
         cmake_dict["build_itom_plugins"] = self.build_itom_plugins

@@ -232,9 +232,9 @@ class Main:
         if os.path.exists(self.__currentDir + "..\\itomProject"):
             raise RuntimeError("The folder '../itomProject' does already exist. Delete it first.")
         
-        call(f"{git} clone --recursive https://github.com/itom-project/itomProject.git {self.__currentDir + "\\..\\itomProject"}")
-        os.chdir("itomProject")
-        call(f"{git} submodule foreach --recursive git checkout master")        
+        git_clone_path = self.__currentDir + "\\..\\itomProject"
+        call(f"{git} clone --recursive --remote https://github.com/itom-project/itomProject.git {git_clone_path}")
+        call(f"{git} submodule foreach --recursive git checkout master",cwd=git_clone_path)        
         return
     
     def runCmakeItomProject(self):

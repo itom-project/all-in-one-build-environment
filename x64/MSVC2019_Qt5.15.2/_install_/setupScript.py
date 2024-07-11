@@ -333,8 +333,8 @@ class Main:
             self.askForPCL()
 
         if self.config["build_with_pcl"] == "TRUE":
-            pclDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.12.0")
-            pclBinDir = self.__clearPath("..\\3rdPartyPCL\\pcl1.12.0\\bin")
+            pclDir = self.__clearPath("..\\3rdPartyPCL\\PCL1.12.0")
+            pclBinDir = self.__clearPath("..\\3rdPartyPCL\\PCL1.12.0\\bin")
             vtkDir = self.__clearPath("..\\3rdPartyPCL\\VTK9.0.3\\lib\\cmake\\vtk-9.0")
             vtkBinaries = self.__clearPath("..\\3rdPartyPCL\\VTK9.0.3\\bin")
             eigenRoot = self.__clearPath("..\\3rdPartyPCL\\Eigen3.4.0")

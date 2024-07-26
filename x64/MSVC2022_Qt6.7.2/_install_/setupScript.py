@@ -510,7 +510,7 @@ class Main:
                 elif selected == "6":
                     self.showEnverText()
                 elif selected == "A":
-                    #self.cloneGit()
+                    self.cloneGit()
                     self.build_itom_core = "ON"
                     self.build_itom_designerplugins = "ON"
                     self.build_itom_plugins = "ON"

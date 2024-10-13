@@ -319,7 +319,7 @@ class Main:
             self.saveConfig()
 
         libusbDir = self.__clearPath("..\\3rdParty\\libusb-1.0.27")
-        openCVPath = self.__clearPath("..\\3rdParty\\OpenCV4.10.0")
+        openCVPath = self.__clearPath("..\\3rdParty\\OpenCV4.10.0\\x64\\vc17\\lib")
         openCVBinDir = self.__clearPath("..\\3rdParty\\OpenCV4.10.0\\x64\\vc17\\bin")
         qmakePath = self.__clearPath("..\\3rdParty\\Qt6.7\\6.7.2\\msvc2019_64\\bin")
         qtBinDir = self.__clearPath("..\\3rdParty\\Qt6.7\\6.7.2\\msvc2019_64\\bin")

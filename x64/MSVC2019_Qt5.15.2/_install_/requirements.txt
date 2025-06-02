@@ -1,8 +1,8 @@
 pip >= 21.0.1
 wheel
 Setuptools
-numpy < 2.0.0
-flake8 == 4.0.1
+numpy
+flake8 >= 4.0.1
 black
 jedi
 scikit-image

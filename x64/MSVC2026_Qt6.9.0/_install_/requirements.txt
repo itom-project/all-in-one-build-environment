@@ -1,0 +1,37 @@
+pip >= 21.0.1
+wheel
+Setuptools
+numpy
+flake8 >= 4.0.1
+black
+jedi
+scikit-image
+scikit-learn
+opencv-python
+tables
+breathe
+ipython
+isort
+matplotlib
+mplcyberpunk
+nbformat
+numpydoc
+openpyxl
+pandas
+plotly
+pydata-sphinx-theme
+pytest
+qbstyles
+ruff
+SciencePlots
+scikit-learn
+scikit-learn
+scipy
+seaborn
+sphinx
+sphinx_copybutton
+sphinx_gallery
+sphinxcontrib-fulltoc
+sphinxcontrib-jquery
+sphinxcontrib-moderncmakedomain
+sphinx-favicon

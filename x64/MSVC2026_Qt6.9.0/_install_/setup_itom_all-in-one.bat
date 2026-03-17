@@ -2,7 +2,7 @@ TITLE %~dp0 INSTALL ITOM DEVELOPMENT ENVIRONMENT
 
 @echo off
 set setupScriptName=setupScript.py
-set setupScriptPath=https://raw.githubusercontent.com/itom-project/all-in-one-build-environment/main/x64/MSVC2022_Qt6.9.0/_install_/%setupScriptName%
+set setupScriptPath=https://raw.githubusercontent.com/itom-project/all-in-one-build-environment/main/x64/MSVC2026_Qt6.9.0/_install_/%setupScriptName%
 
 echo ---------------------------------------------
 echo -- STEP 1: Setup script: check for updates --

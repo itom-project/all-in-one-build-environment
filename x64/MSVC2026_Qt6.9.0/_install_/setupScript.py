@@ -229,10 +229,10 @@ class Main:
             self.askForGit()
             self.loadConfig()
             git = self.config["git_path"]
-        if os.path.exists(self.__currentDir + "..\\itomProject"):
-            raise RuntimeError("The folder '../itomProject' does already exist. Delete it first.")
+        if os.path.exists(self.itomProjectSourcePath):
+            raise RuntimeError("The folder '%s' does already exist. Delete it first." % self.itomProjectSourcePath)
         
-        git_clone_path = self.__currentDir + "\\..\\itomProject"
+        git_clone_path = self.itomProjectSourcePath
         call(f"{git} clone --recursive --remote https://github.com/itom-project/itomProject.git {git_clone_path}")
         call(f"{git} submodule foreach --recursive git checkout master",cwd=git_clone_path)        
         return
@@ -498,15 +498,15 @@ class Main:
                     self.build_itom_plugins = "OFF"
                     self.runCmakeItomProject()
                 elif selected == "3":
-                    self.compileDebugAndRelease((self.__currentDir + "\\..\\itomProject\\build\\itom"), "itom")
+                    self.compileDebugAndRelease(os.path.join(self.itomProjectBuildPath, "itom"), "itom")
                 elif selected == "4":
                     self.build_itom_core = "OFF"
                     self.build_itom_designerplugins = "ON"
                     self.build_itom_plugins = "ON"
                     self.runCmakeItomProject()
                 elif selected == "5":
-                    self.compileDebugAndRelease((self.__currentDir + "\\..\\itomProject\\build\\designerplugins"), "designerplugins")
-                    self.compileDebugAndRelease((self.__currentDir + "\\..\\itomProject\\build\\plugins"), "plugins")
+                    self.compileDebugAndRelease(os.path.join(self.itomProjectBuildPath, "designerplugins"), "designerplugins")
+                    self.compileDebugAndRelease(os.path.join(self.itomProjectBuildPath, "plugins"), "plugins")
                 elif selected == "6":
                     self.showEnverText()
                 elif selected == "A":
@@ -515,7 +515,7 @@ class Main:
                     self.build_itom_designerplugins = "ON"
                     self.build_itom_plugins = "ON"
                     self.runCmakeItomProject()
-                    self.compileDebugAndRelease((self.__currentDir + "\\..\\itomProject\\build"), "itomProject")
+                    self.compileDebugAndRelease(self.itomProjectBuildPath, "itomProject")
                     self.showEnverText()
                 elif selected == "-1":
                     print("exit")
